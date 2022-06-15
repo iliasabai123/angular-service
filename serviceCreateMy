@@ -1,14 +1,71 @@
+//Для начало создаем папку для сервисов и создаем там сервис счетчика
 
-import {Component} from '@angular/core'
-import {AppCounterService} from './services/app-counter.service'
+app-counter.service.ts
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
-export class AppComponent {
+export class AppCounterService {
+  counter = 0
 
-  constructor(public appCounterService: AppCounterService) {}
+  increase() {
+    this.counter++
+  }
 
+  decrease() {
+    this.counter--
+  }
 }
+
+
+
+
+app.module.ts
+
+import {BrowserModule} from '@angular/platform-browser'
+import {NgModule} from '@angular/core'
+
+import {AppComponent} from './app.component'
+import {FormsModule} from '@angular/forms';
+import {AppCounterService} from './services/app-counter.service';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule
+  ],
+  providers: [
+    AppCounterService  //Потом добавим сервис в провайдеры тем самым импортируется
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
+
+
+
+
+
+app.component.html
+
+
+<div class="container">
+  <h1>Angular Services</h1>
+
+
+  <div class="card">
+    <h2>App Counter: {{appCounterService.counter}}</h2>  //Вставляем сюда сам счетчик из сервиса
+
+    <button class="btn" (click)="appCounterService.increase()">+</button> //Вызываем метод плюса из сервиса
+    <button class="btn" (click)="appCounterService.decrease()">-</button>  //Вызываем мето минуса из сервиса
+
+  </div>
+</div>
+
+
+
+
+
+
+
