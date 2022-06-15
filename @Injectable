@@ -1,0 +1,17 @@
+app-counter.service.ts
+
+
+@Injectable({
+  providedIn: 'root'  // Регистрирует сервис в корневой тоесть в апп компонент. Тоесть теперь можно и не нужно регистрировать в апп модуле в провайдерс. И теперь еще можно добавить конструктор и импортировать из других сервисов в этот сервис
+})
+export class AppCounterService {
+  counter = 0
+
+  increase() {
+    this.counter++
+  }
+
+  decrease() {
+    this.counter--
+  }
+}
