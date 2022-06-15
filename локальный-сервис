@@ -1,0 +1,21 @@
+app.component.ts
+
+import {Component} from '@angular/core'
+import {AppCounterService} from './services/app-counter.service'
+import {LocalCounterService} from './services/local-counter.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  providers:[LocalCounterService]  // Добавление локального сервиса в апп-компонент. 
+})
+export class AppComponent {
+  constructor(public appCounterService: AppCounterService,
+              public localCounterService: LocalCounterService) { // Обьявление в конструкторе локального сервиса
+  }
+
+} //Тоесть этот сервис будет отдельно только в апп компоненте. Разница между глобальным и локальным в том что если мы обьявим глобальным то в апп компоненте если добавить еще компонент и там тоже использовать то этот сервис будет являться общим и будет меняться в оба местах 
+// И еще при обьявлений локального сервиса не нужно в сервисе указывать в @Injectable({
+  providedIn: 'root' //это не нужно указывать
+})
